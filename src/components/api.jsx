@@ -34,74 +34,53 @@ export const createTodo = async (todo) => {
       "Content-Type": `application/json`,
     },
     data: { todo },
-  })
-    .then((res) => {
-      if (res.status === 201) {
-        console.log("createTodo:", res);
-      }
-    })
-    .catch((err) => {
-      console.error("createTodo:", err);
-    });
+  });
 };
 
-export const getTodo = async (setTodoData) => {
+export const getTodo = async () => {
   const ACCESS_TOKEN = localStorage.getItem("loginToken");
 
-  await axios({
+  return await axios({
     method: "get",
     url: `${BASE_URL}todos`,
     headers: {
       Authorization: `Bearer ${ACCESS_TOKEN}`,
     },
-  })
-    .then((res) => setTodoData(res.data))
-    .catch((err) => console.error("getTodo:", err));
+  });
 };
 
 export const updateTodo = async (data) => {
   const ACCESS_TOKEN = localStorage.getItem("loginToken");
-  const { id, todoText, isCompleted } = data;
+  const { id, isCompleted, todo } = data;
 
-  try {
-    await axios({
-      method: "put",
-      url: `${BASE_URL}todos/${id}`,
-      headers: {
-        Authorization: `Bearer ${ACCESS_TOKEN}`,
-        "Content-Type": `application/json`,
-      },
-      data: {
-        todo: todoText,
-        isCompleted: isCompleted,
-      },
-    }).then((res) => {
-      if (res.status === 200) {
-        console.log("updateTodo:", res);
-      }
-    });
-  } catch (err) {
-    console.error("updateTodo:", err);
-  }
+  return await axios({
+    method: "put",
+    url: `${BASE_URL}todos/${id}`,
+    headers: {
+      Authorization: `Bearer ${ACCESS_TOKEN}`,
+      "Content-Type": `application/json`,
+    },
+    data: { todo, isCompleted },
+  });
 };
 
 export const deleteTodo = async (data) => {
   const ACCESS_TOKEN = localStorage.getItem("loginToken");
   const { id } = data;
 
-  try {
-    await axios({
-      method: "delete",
-      url: `${BASE_URL}todos/${id}`,
-      headers: {
-        Authorization: `Bearer ${ACCESS_TOKEN}`,
-      },
-    }).then((res) => {
+  return await axios({
+    method: "delete",
+    url: `${BASE_URL}todos/${id}`,
+    headers: {
+      Authorization: `Bearer ${ACCESS_TOKEN}`,
+    },
+  })
+    .then((res) => {
       if (res.status === 204) {
         console.log("deleteTodo:", res);
       }
+    })
+    .catch((err) => {
+      console.error("deleteTodo:", err);
     });
-  } catch (err) {
-    console.error("deleteTodo:", err);
-  }
 };

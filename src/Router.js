@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import App from "App";
 import GlobalStyles from "./styles/GlobalStyles";
 import SignUp from "./pages/SginUp";
-// import Todo from "pages/Todo";
+import Todo from "pages/Todo";
 
 const Router = () => {
   return (
@@ -12,7 +12,7 @@ const Router = () => {
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="sign_up" element={<SignUp />} />
-        {/* <Route path="todo" element={<Todo />} /> */}
+        <Route path="todo" element={<Todo />} />
       </Routes>
     </BrowserRouter>
   );
