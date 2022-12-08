@@ -38,7 +38,22 @@ const SignUp = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    postSignUp(email, pw, navigate, setErrMessage);
+    postSignUp({ email, password: pw })
+      .then((res) => {
+        console.log("response:", res);
+        if (res.status === 201) {
+          navigate("/");
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        if (err.response.status === 400) {
+          setErrMessage({
+            isErr: true,
+            message: "이미 존재하는 이메일입니다.",
+          });
+        }
+      });
   };
 
   // 이메일

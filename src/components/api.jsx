@@ -2,147 +2,106 @@ import axios from "axios";
 
 const BASE_URL = "https://pre-onboarding-selection-task.shop/";
 
-export const postSignUp = async (data, navigate, setErrMessage) => {
-  const { email, pw } = data;
-  try {
-    await axios({
-      method: "post",
-      url: `${BASE_URL}auth/signup`,
-      headers: { "Content-Type": "application/json" },
-      data: {
-        email,
-        pw,
-      },
-    }).then((res) => {
-      console.log("response:", res);
+export const postSignUp = async (data) => {
+  const { email, password } = data;
+  return await axios({
+    method: "post",
+    url: `${BASE_URL}auth/signup`,
+    headers: { "Content-Type": `application/json` },
+    data: { email, password },
+  });
+};
+
+export const postSignIn = async (data) => {
+  const { email, password } = data;
+
+  return await axios({
+    method: "post",
+    url: `${BASE_URL}auth/signin`,
+    headers: { "Content-Type": `application/json` },
+    data: { email, password },
+  });
+};
+
+export const createTodo = async (todo) => {
+  const ACCESS_TOKEN = localStorage.getItem("loginToken");
+
+  return await axios({
+    method: "post",
+    url: `${BASE_URL}todos`,
+    headers: {
+      Authorization: `Bearer ${ACCESS_TOKEN}`,
+      "Content-Type": `application/json`,
+    },
+    data: { todo },
+  })
+    .then((res) => {
       if (res.status === 201) {
-        navigate("/");
+        console.log("createTodo:", res);
       }
+    })
+    .catch((err) => {
+      console.error("createTodo:", err);
     });
-  } catch (err) {
-    console.error(err);
-    if (err.response.status === 400) {
-      setErrMessage({
-        isErr: true,
-        message: "이미 존재하는 이메일입니다.",
-      });
-    }
-  }
 };
 
-export const postSignIn = async (data, navigate, setErrMessage) => {
-  const { email, pw } = data;
+export const getTodo = async (setTodoData) => {
+  const ACCESS_TOKEN = localStorage.getItem("loginToken");
 
-  try {
-    await axios({
-      method: "post",
-      url: `${BASE_URL}auth/signin`,
-      headers: { "Content-Type": "application/json" },
-      data: {
-        email,
-        pw,
-      },
-    }).then((res) => {
-      console.log("response:", res);
-      if (res.status === 200) {
-        localStorage.setItem("loginToken", res.data.access_token);
-        navigate("/todo");
-      }
-    });
-  } catch (err) {
-    if (err.response.status === 401) {
-      setErrMessage({
-        isErr: true,
-        message: "이메일 또는 비밀번호를 확인해주세요.",
-      });
-    } else if (err.response.status === 404) {
-      setErrMessage({
-        isErr: true,
-        message: "로그인 정보가 시스템에 있는 계정과 일치하지 않습니다.",
-      });
-    }
-  }
-};
-
-export const createTodo = async (data) => {
-  const { todoText } = data;
-  try {
-    await axios({
-      method: "post",
-      url: `${BASE_URL}todos`,
-      headers: {
-        Authorization: "Bearer access_token",
-        "Content-Type": "application/json",
-      },
-      data: {
-        todoText,
-      },
-    }).then((res) => {
-      console.log("response:", res);
-      if (res.status === 201) {
-      }
-    });
-  } catch (err) {
-    console.error(err);
-  }
-};
-
-export const getTodo = async () => {
-  try {
-    await axios({
-      method: "get",
-      url: `${BASE_URL}todos`,
-      headers: {
-        Authorization: "Bearer access_token",
-      },
-    }).then((res) => {
-      console.log("response:", res);
-      if (res.status === 200) {
-      }
-    });
-  } catch (err) {
-    console.error(err);
-  }
+  await axios({
+    method: "get",
+    url: `${BASE_URL}todos`,
+    headers: {
+      Authorization: `Bearer ${ACCESS_TOKEN}`,
+    },
+  })
+    .then((res) => setTodoData(res.data))
+    .catch((err) => console.error("getTodo:", err));
 };
 
 export const updateTodo = async (data) => {
-  const { todoText, isCompleted } = data;
+  const ACCESS_TOKEN = localStorage.getItem("loginToken");
+  const { id, todoText, isCompleted } = data;
+
   try {
     await axios({
       method: "put",
-      url: `${BASE_URL}todos/:id`,
+      url: `${BASE_URL}todos/${id}`,
       headers: {
-        Authorization: "Bearer access_token",
-        "Content-Type": "application/json",
+        Authorization: `Bearer ${ACCESS_TOKEN}`,
+        "Content-Type": `application/json`,
       },
       data: {
-        todoText,
-        isCompleted,
+        todo: todoText,
+        isCompleted: isCompleted,
       },
     }).then((res) => {
-      console.log("response:", res);
       if (res.status === 200) {
+        console.log("updateTodo:", res);
       }
     });
   } catch (err) {
-    console.error(err);
+    console.error("updateTodo:", err);
   }
 };
 
-export const deleteTodo = async () => {
+export const deleteTodo = async (data) => {
+  const ACCESS_TOKEN = localStorage.getItem("loginToken");
+  const { id } = data;
+
   try {
     await axios({
-      method: "put",
-      url: `${BASE_URL}todos/:id`,
+      method: "delete",
+      url: `${BASE_URL}todos/${id}`,
       headers: {
-        Authorization: "Bearer access_token",
+        Authorization: `Bearer ${ACCESS_TOKEN}`,
       },
     }).then((res) => {
-      console.log("response:", res);
       if (res.status === 204) {
+        console.log("deleteTodo:", res);
       }
     });
   } catch (err) {
-    console.error(err);
+    console.error("deleteTodo:", err);
   }
 };

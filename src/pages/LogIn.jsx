@@ -35,7 +35,28 @@ const LogIn = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    postSignIn({ email, password }, navigate, setErrMessage);
+    postSignIn({ email, password })
+      .then((res) => {
+        console.log("response:", res);
+        if (res.status === 200) {
+          localStorage.setItem("loginToken", res.data.access_token);
+          navigate("/todo");
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        if (err.response.status === 401) {
+          setErrMessage({
+            isErr: true,
+            message: "이메일 또는 비밀번호를 확인해주세요.",
+          });
+        } else if (err.response.status === 404) {
+          setErrMessage({
+            isErr: true,
+            message: "로그인 정보가 시스템에 있는 계정과 일치하지 않습니다.",
+          });
+        }
+      });
   };
 
   return (
