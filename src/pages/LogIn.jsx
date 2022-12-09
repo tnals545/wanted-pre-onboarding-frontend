@@ -1,35 +1,51 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { postSignIn } from "components/api";
+import { Div } from "styles/Div";
+import { Button } from "styles/Button";
+import { Input } from "styles/Input";
+import { Span } from "styles/Span";
 
 const LogIn = () => {
   const [inputValue, setInputValue] = useState({
     email: "",
     password: "",
+    isValidEmail: false,
+    isValidPassword: false,
   });
   const [errMessage, setErrMessage] = useState({
     isErr: false,
     message: "",
   });
 
-  const { email, password } = inputValue;
+  const { email, password, isValidEmail, isValidPassword } = inputValue;
 
   const emailRegex =
     /([\w-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
-  const isValidEmail = emailRegex.test(email);
-  const isValidPassword = password.length >= 8;
-  const getIsActive = isValidEmail && isValidPassword === true;
+  const passwordRegex = /.{8}/g;
 
   const navigate = useNavigate();
 
   const handleInput = (e) => {
     const {
-      target: { name, value },
+      target: { type, value },
     } = e;
-    setInputValue({
-      ...inputValue,
-      [name]: value,
+    setInputValue((prev) => {
+      return {
+        ...prev,
+        [type]: value,
+        isValidEmail:
+          type === "email" ? emailRegex.test(value) : prev.isValidEmail,
+        isValidPassword:
+          type === "password"
+            ? passwordRegex.test(value)
+            : prev.isValidPassword,
+      };
+    });
+    setErrMessage({
+      isErr: false,
+      message: "",
     });
   };
 
@@ -61,23 +77,60 @@ const LogIn = () => {
 
   return (
     <>
+      <Div purpose="login" className="logo">
+        <Span size="XXLarge" bold="thick">
+          ToDo
+        </Span>
+      </Div>
       <form onSubmit={onSubmit} className="signinInput">
-        <div className="emailInput">
-          <div className="inputMessage">이메일</div>
-          <input name="email" onChange={handleInput} />
-        </div>
-        <div className="passwordInput">
-          <div className="inputMessage">비밀번호</div>
-          <input type="password" name="password" onChange={handleInput} />
-        </div>
-        <span>{errMessage.isErr && errMessage.message}</span>
-        <input
-          className={
-            getIsActive ? "signinButtonAction" : "signinButtonInaction"
-          }
-          type="submit"
-          value="로그인"
-        />
+        <Div purpose="login" className="emailInput">
+          <Span>이메일</Span>
+          <Input
+            type="email"
+            onChange={handleInput}
+            placeholder="이메일을 입력해주세요."
+          />
+        </Div>
+
+        <Div purpose="login" className="passwordInput">
+          <Span>비밀번호</Span>
+          <Input
+            type="password"
+            onChange={handleInput}
+            placeholder="비밀번호를 입력해주세요."
+          />
+        </Div>
+
+        <Div purpose="login" className="errMessage">
+          {errMessage.isErr && (
+            <Span size="medium" color="red" bgColor="bright">
+              {errMessage.message}
+            </Span>
+          )}
+        </Div>
+
+        <Div purpose="login" className="loginBtn">
+          <Button
+            type="submit"
+            disabled={!(isValidEmail && isValidPassword)}
+            color="bgMagenta"
+            size="large"
+            bold="thick"
+          >
+            로그인
+          </Button>
+        </Div>
+
+        <Div purpose="login" className="signupSpan">
+          <Span>
+            아직 계정이 없으신가요?{" "}
+            <Link to="/sign_up">
+              <Span color="blue" bgColor="bright" bold="thick">
+                회원가입
+              </Span>
+            </Link>
+          </Span>
+        </Div>
       </form>
     </>
   );
