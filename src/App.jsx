@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { Container } from "styles/Container";
 import Title from "components/Title";
@@ -18,14 +18,6 @@ const App = () => {
     <Container>
       <Title title="Login" />
       <LogIn />
-      <div className="signinBottom">
-        <p>
-          아직 계정이 없으신가요?{" "}
-          <Link to="/sign_up">
-            <span>회원가입</span>
-          </Link>
-        </p>
-      </div>
     </Container>
   );
 };
