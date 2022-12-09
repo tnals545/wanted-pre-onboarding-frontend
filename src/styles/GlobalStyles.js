@@ -3,12 +3,16 @@ import reset from "styled-reset";
 
 const GlobalStyles = createGlobalStyle`
     ${reset}
-    a{
-        text-decoration: none;
-        color: inherit;
+    a {
+      text-decoration: none;
+      color: inherit;
     }
-    *{
-        box-sizing: border-box;
+    * {
+      box-sizing: border-box;
+      font-family: "Gothic A1", sans-serif;
+    }
+    body {
+      background-color: #b76fc0;
     }
     input, textarea { 
       -moz-user-select: auto;
@@ -30,8 +34,9 @@ const GlobalStyles = createGlobalStyle`
       color: rgb(199, 197, 197);
     }
     .TodoList li.on em {
-      color: rgb(199, 197, 197); text-decoration: line-through rgb(159, 127, 231);
-      }
+      color: rgb(199, 197, 197);
+      text-decoration: line-through rgb(159, 127, 231);
+    }
 `;
 
 export default GlobalStyles;
