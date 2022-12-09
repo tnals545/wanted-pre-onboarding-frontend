@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Button } from "styles/Button";
 
 import { Container } from "styles/Container";
+import { Div } from "styles/Div";
+import { Input } from "styles/Input";
+import { Span } from "styles/Span";
 import { postSignUp } from "../components/api";
 import Title from "../components/Title";
 
@@ -119,7 +123,7 @@ const SignUp = () => {
   };
 
   useEffect(() => {
-    if (pw !== pwConfirm) {
+    if (pwConfirm.length < 8 || pw !== pwConfirm) {
       setPwConfirmState((prev) => {
         return {
           ...prev,
@@ -141,45 +145,84 @@ const SignUp = () => {
   return (
     <Container>
       <Title title="Sign Up" />
+      <Div purpose="signup" className="header">
+        <Span size="XLarge" bold="thick">
+          회원가입
+        </Span>
+      </Div>
       <form onSubmit={onSubmit}>
-        <div className="formbox">
-          <p>이메일 *</p>
-          <input onChange={onChangeEmail} type="email" />
+        <Div purpose="signup" className="signupEmail">
+          <Span>
+            이메일<Span color="red">*</Span>
+          </Span>
+          <Input onChange={onChangeEmail} type="email" />
+        </Div>
+        <Div purpose="signup" className="errMessage">
           {email.length > 0 && (
-            <span className={`message ${isEmail ? "success" : "error"}`}>
+            <Span
+              size="medium"
+              bgColor="bright"
+              className={`${isEmail ? "success" : "error"}`}
+            >
               {emailMessage}
-            </span>
+            </Span>
           )}
-        </div>
+        </Div>
 
-        <div className="formbox">
-          <p>비밀번호 *</p>
-          <input onChange={onChangePassword} type="password" />
+        <Div purpose="signup" className="signupPW">
+          <Span>
+            비밀번호<Span color="red">*</Span>
+          </Span>
+          <Input onChange={onChangePassword} type="password" />
+        </Div>
+        <Div purpose="signup" className="errMessage">
           {pw.length > 0 && (
-            <span className={`message ${isPw ? "success" : "error"}`}>
+            <Span
+              size="medium"
+              bgColor="bright"
+              className={`${isPw ? "success" : "error"}`}
+            >
               {pwMessage}
-            </span>
+            </Span>
           )}
-        </div>
+        </Div>
 
-        <div className="formbox">
-          <p>비밀번호 확인 *</p>
-          <input onChange={onChangePasswordConfirm} type="password" />
+        <Div purpose="signup" className="signupPWConfirm">
+          <Span>
+            비밀번호 확인<Span color="red">*</Span>
+          </Span>
+          <Input onChange={onChangePasswordConfirm} type="password" />
+        </Div>
+        <Div purpose="signup" className="errMessage">
           {pwConfirm.length > 0 && (
-            <span className={`message ${isPwConfirm ? "success" : "error"}`}>
+            <Span
+              size="medium"
+              bgColor="bright"
+              className={`${isPwConfirm ? "success" : "error"}`}
+            >
               {pwConfirmMessage}
-            </span>
+            </Span>
           )}
-        </div>
+        </Div>
 
-        <div>
-          <span>{errMessage.isErr && errMessage.message}</span>
-          <input
+        <Div purpose="signup" className="signupBtn">
+          <Button
             type="submit"
-            value="완료"
             disabled={!(isEmail && isPw && isPwConfirm)}
-          />
-        </div>
+            color="bgMagenta"
+            size="large"
+            bold="thick"
+          >
+            완료
+          </Button>
+        </Div>
+        <Div purpose="signup" className="errMessage">
+          {errMessage.isErr && (
+            <Span size="medium" bgColor="bright" color="red">
+              {errMessage.message}
+            </Span>
+          )}
+        </Div>
       </form>
     </Container>
   );
