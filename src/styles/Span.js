@@ -46,6 +46,7 @@ const BOLD = {
 export const Span = styled.span`
   color: #ffffff;
   padding: 1px 5px;
+  word-break: break-all;
 
   ${(p) => p.size && `${SIZE[p.size]}`}
   ${(p) => p.color && `${COLOR[p.color]}`}
@@ -57,5 +58,17 @@ export const Span = styled.span`
   }
   &.error {
     color: red;
+  }
+  &.cursor {
+    cursor: pointer;
+  }
+  &.done {
+    opacity: 0.5;
+    &.line {
+      text-decoration: line-through white;
+    }
+  }
+  &.checkIcon {
+    margin-top: 5px;
   }
 `;

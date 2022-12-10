@@ -13,4 +13,10 @@ export const Input = styled.input`
     color: #ffffff;
     font-size: 14px;
   }
+
+  &.todoInsert,
+  &.todoEdit {
+    width: 700px;
+    font-size: 20px;
+  }
 `;

@@ -1,13 +1,24 @@
+import NavBar from "components/NavBar";
 import TodoInsert from "components/todo/TodoInsert";
 import TodoList from "components/todo/TodoList";
+import { Container } from "styles/Container";
+import { Div } from "styles/Div";
+import { Span } from "styles/Span";
 
 const Todo = () => {
   return (
-    <div className="Todos">
-      <h1>Todo List</h1>
-      <TodoInsert />
-      <TodoList />
-    </div>
+    <>
+      <NavBar />
+      <Container className="todo">
+        <Div purpose="todo" className="todoTitle">
+          <Span size="XXLarge" bold="thick">
+            Todo List
+          </Span>
+        </Div>
+        <TodoInsert />
+        <TodoList />
+      </Container>
+    </>
   );
 };
 

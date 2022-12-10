@@ -1,6 +1,12 @@
 import styled, { css } from "styled-components";
 
 const PURPOSE = {
+  navbar: css`
+    position: fixed;
+    float: right;
+    top: 40px;
+    right: 80px;
+  `,
   login: css`
     &.logo,
     &.signupSpan {
@@ -42,6 +48,46 @@ const PURPOSE = {
 
     span {
       margin: 16px 0;
+    }
+  `,
+  todo: css`
+    justify-content: center;
+    align-items: center;
+
+    &.todoTitle {
+      text-align: center;
+      padding-bottom: 50px;
+    }
+    &.todoList {
+      position: fixed;
+      top: 200px;
+    }
+    &.todoInsert {
+      form {
+        width: 800px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding-bottom: 40px;
+        border-bottom: 1px solid #965c9d;
+      }
+    }
+  `,
+  todoItem: css`
+    align-items: center;
+    padding: 8.5px 0;
+
+    form {
+      display: flex;
+    }
+
+    &.todoItem {
+      justify-content: space-between;
+    }
+    &.todoItem,
+    &.todoContents,
+    &.editAndDelete {
+      flex-direction: row;
     }
   `,
 };

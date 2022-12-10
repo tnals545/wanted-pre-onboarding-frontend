@@ -1,17 +1,12 @@
 import styled, { css } from "styled-components";
 
 const COLOR = {
-  textBlue: css`
+  green: css`
     color: #226bef;
-    border: solid 1px #226bef;
   `,
   bgMagenta: css`
     color: #ffffff;
     background-color: #9b55a5;
-  `,
-  bgWhite: css`
-    color: #3b3f4a;
-    border: solid 1px #e4e6ea;
   `,
 };
 
@@ -48,5 +43,9 @@ export const Button = styled.button`
   :disabled {
     opacity: 0.5;
     cursor: default;
+  }
+
+  &.iconBtn {
+    padding: 0 10px;
   }
 `;

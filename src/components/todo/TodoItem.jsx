@@ -5,6 +5,11 @@ import {
   MdOutlineCheckBox,
   MdOutlineCheckBoxOutlineBlank,
 } from "react-icons/md";
+import { Button } from "styles/Button";
+import { Div } from "styles/Div";
+import { Input } from "styles/Input";
+import { Li } from "styles/Li";
+import { Span } from "styles/Span";
 
 const TodoItem = ({ todoObj }) => {
   const { id, isCompleted, todo } = todoObj;
@@ -43,51 +48,74 @@ const TodoItem = ({ todoObj }) => {
     updateTodo({ ...todoObj, isCompleted: !isCompleted });
   };
 
+  const onClickCancel = () => {
+    setText(todo);
+  };
+
   useEffect(() => {
     if (isEditTodo) {
       setText(todo);
       textRef.current?.focus();
     }
-  }, [isEditTodo]);
+  }, [isEditTodo, todo]);
 
   return (
-    <div>
-      <li>
-        {isEditTodo ? (
-          <>
-            <form onSubmit={onSubmit}>
-              <input
-                type="text"
-                value={text}
-                onChange={changeInput}
-                ref={textRef}
-              />
-            </form>
-          </>
-        ) : (
-          <>
-            <span onClick={() => toggleIsCompleted()}>
+    <Li className={isEditTodo && "border-none"}>
+      {isEditTodo ? (
+        <Div purpose="todoItem">
+          <form onSubmit={onSubmit}>
+            <Input
+              className="todoEdit"
+              type="text"
+              value={text}
+              onChange={changeInput}
+              ref={textRef}
+            />
+            <Button type="submit">
+              <Span size="large">🟢</Span>
+            </Button>
+            <Button type="submit" onClick={onClickCancel}>
+              <Span size="large">❌</Span>
+            </Button>
+          </form>
+        </Div>
+      ) : (
+        <Div purpose="todoItem" className="todoItem">
+          <Div purpose="todoItem" className="todoContents">
+            <Span
+              onClick={() => toggleIsCompleted()}
+              className={`checkIcon ${isCompleted && "done"}`}
+            >
               {isCompleted ? (
-                <MdOutlineCheckBox />
+                <MdOutlineCheckBox size="20" />
               ) : (
-                <MdOutlineCheckBoxOutlineBlank />
+                <MdOutlineCheckBoxOutlineBlank size="20" />
               )}
-            </span>
-            <em onClick={() => toggleIsCompleted()}>{todo}</em>
-            <button
+            </Span>
+            <Span
+              onClick={() => toggleIsCompleted()}
+              className={isCompleted && "done line"}
+              size="large"
+            >
+              {todo}
+            </Span>
+          </Div>
+          <Div purpose="todoItem" className="editAndDelete">
+            <Button
+              className="iconBtn"
               onClick={() => {
                 setIsEditTodo(true);
               }}
             >
-              <FaPencilAlt size="15" />
-            </button>
-            <button onClick={() => deleteTodo({ id })}>
-              <FaRegTrashAlt color="rgb(175,169,169)" size="15" />
-            </button>
-          </>
-        )}
-      </li>
-    </div>
+              <FaPencilAlt size="20" color="#16C60C" />
+            </Button>
+            <Button className="iconBtn" onClick={() => deleteTodo({ id })}>
+              <FaRegTrashAlt size="20" color="#58385c" />
+            </Button>
+          </Div>
+        </Div>
+      )}
+    </Li>
   );
 };
 
