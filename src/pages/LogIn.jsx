@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import { postSignIn } from "components/api";
+
 import { Div } from "styles/Div";
 import { Button } from "styles/Button";
 import { Input } from "styles/Input";
@@ -53,7 +54,6 @@ const LogIn = () => {
     e.preventDefault();
     postSignIn({ email, password })
       .then((res) => {
-        console.log("response:", res);
         if (res.status === 200) {
           localStorage.setItem("loginToken", res.data.access_token);
           navigate("/todo");

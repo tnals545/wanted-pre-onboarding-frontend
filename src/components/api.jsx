@@ -74,13 +74,5 @@ export const deleteTodo = async (data) => {
     headers: {
       Authorization: `Bearer ${ACCESS_TOKEN}`,
     },
-  })
-    .then((res) => {
-      if (res.status === 204) {
-        console.log("deleteTodo:", res);
-      }
-    })
-    .catch((err) => {
-      console.error("deleteTodo:", err);
-    });
+  });
 };

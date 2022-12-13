@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Button } from "styles/Button";
 
+import { postSignUp } from "components/api";
+import Title from "components/Title";
+
+import { Button } from "styles/Button";
 import { Container } from "styles/Container";
 import { Div } from "styles/Div";
 import { Input } from "styles/Input";
 import { Span } from "styles/Span";
-import { postSignUp } from "../components/api";
-import Title from "../components/Title";
 
 const SignUp = () => {
   // 이메일 상태
@@ -44,7 +45,6 @@ const SignUp = () => {
     e.preventDefault();
     postSignUp({ email, password: pw })
       .then((res) => {
-        console.log("response:", res);
         if (res.status === 201) {
           navigate("/");
         }

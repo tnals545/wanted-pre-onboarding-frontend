@@ -1,7 +1,9 @@
-import { getTodo } from "components/api";
 import { useEffect, useState } from "react";
+
+import TodoItem from "components/todo/TodoItem";
+import { getTodo } from "components/api";
+
 import { Div } from "styles/Div";
-import TodoItem from "./TodoItem";
 
 const TodoList = () => {
   const [todoData, setTodoData] = useState([]);

@@ -1,5 +1,7 @@
-import { createTodo } from "components/api";
 import { useRef, useState } from "react";
+
+import { createTodo } from "components/api";
+
 import { Button } from "styles/Button";
 import { Div } from "styles/Div";
 import { Input } from "styles/Input";
@@ -21,15 +23,7 @@ const TodoInsert = () => {
 
     if (!text) return;
 
-    createTodo(text)
-      .then((res) => {
-        if (res.status === 201) {
-          console.log("createTodo:", res);
-        }
-      })
-      .catch((err) => {
-        console.error("createTodo:", err);
-      });
+    createTodo(text);
 
     setText("");
     textRef.current?.focus();

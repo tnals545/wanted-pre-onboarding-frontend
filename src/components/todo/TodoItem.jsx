@@ -1,10 +1,12 @@
-import { deleteTodo, updateTodo } from "components/api";
 import { useEffect, useRef, useState } from "react";
 import { FaRegTrashAlt, FaPencilAlt } from "react-icons/fa";
 import {
   MdOutlineCheckBox,
   MdOutlineCheckBoxOutlineBlank,
 } from "react-icons/md";
+
+import { deleteTodo, updateTodo } from "components/api";
+
 import { Button } from "styles/Button";
 import { Div } from "styles/Div";
 import { Input } from "styles/Input";
@@ -31,15 +33,7 @@ const TodoItem = ({ todoObj }) => {
 
     if (!text) return;
 
-    updateTodo({ id, isCompleted, todo: text })
-      .then((res) => {
-        if (res.status === 201) {
-          console.log("updateTodo:", res);
-        }
-      })
-      .catch((err) => {
-        console.error("updateTodo:", err);
-      });
+    updateTodo({ id, isCompleted, todo: text });
 
     setIsEditTodo(false);
   };
