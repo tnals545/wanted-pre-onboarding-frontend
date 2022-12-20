@@ -21,7 +21,7 @@ const TodoItem = ({ todoObj }) => {
 
   const textRef = useRef();
 
-  const changeInput = (e) => {
+  const onChangeInput = (e) => {
     const {
       target: { value },
     } = e;
@@ -38,7 +38,7 @@ const TodoItem = ({ todoObj }) => {
     setIsEditTodo(false);
   };
 
-  const toggleIsCompleted = () => {
+  const isCompletedToggle = () => {
     updateTodo({ ...todoObj, isCompleted: !isCompleted });
   };
 
@@ -62,7 +62,7 @@ const TodoItem = ({ todoObj }) => {
               className="todoEdit"
               type="text"
               value={text}
-              onChange={changeInput}
+              onChange={onChangeInput}
               ref={textRef}
             />
             <Button type="submit">
@@ -77,7 +77,7 @@ const TodoItem = ({ todoObj }) => {
         <Div purpose="todoItem" className="todoItem">
           <Div purpose="todoItem" className="todoContents">
             <Span
-              onClick={() => toggleIsCompleted()}
+              onClick={() => isCompletedToggle()}
               className={`checkIcon ${isCompleted && "done"}`}
             >
               {isCompleted ? (
@@ -87,7 +87,7 @@ const TodoItem = ({ todoObj }) => {
               )}
             </Span>
             <Span
-              onClick={() => toggleIsCompleted()}
+              onClick={() => isCompletedToggle()}
               className={isCompleted && "done line"}
               size="large"
             >

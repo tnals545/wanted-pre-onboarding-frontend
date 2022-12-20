@@ -11,7 +11,7 @@ const TodoInsert = () => {
   const textRef = useRef(null);
   const [text, setText] = useState("");
 
-  const changeInput = (e) => {
+  const onChangeInput = (e) => {
     const {
       target: { value },
     } = e;
@@ -35,7 +35,7 @@ const TodoInsert = () => {
           className="todoInsert"
           type="text"
           value={text}
-          onChange={changeInput}
+          onChange={onChangeInput}
           ref={textRef}
         />
         <Button type="submit">

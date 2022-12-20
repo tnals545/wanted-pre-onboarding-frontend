@@ -21,6 +21,7 @@ const LogIn = () => {
   });
 
   const { email, password, isValidEmail, isValidPassword } = inputValue;
+  const { isErr, message } = errMessage;
 
   const emailRegex =
     /([\w-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
@@ -28,7 +29,7 @@ const LogIn = () => {
 
   const navigate = useNavigate();
 
-  const handleInput = (e) => {
+  const onChnageInput = (e) => {
     const {
       target: { type, value },
     } = e;
@@ -87,7 +88,7 @@ const LogIn = () => {
           <Span>이메일</Span>
           <Input
             type="email"
-            onChange={handleInput}
+            onChange={onChnageInput}
             placeholder="이메일을 입력해주세요."
           />
         </Div>
@@ -96,15 +97,15 @@ const LogIn = () => {
           <Span>비밀번호</Span>
           <Input
             type="password"
-            onChange={handleInput}
+            onChange={onChnageInput}
             placeholder="비밀번호를 입력해주세요."
           />
         </Div>
 
         <Div purpose="login" className="errMessage">
-          {errMessage.isErr && (
+          {isErr && (
             <Span size="medium" color="red" bgColor="bright">
-              {errMessage.message}
+              {message}
             </Span>
           )}
         </Div>

@@ -38,6 +38,7 @@ const SignUp = () => {
   const { email, emailMessage, isEmail } = emailState;
   const { pw, pwMessage, isPw } = pwState;
   const { pwConfirm, pwConfirmMessage, isPwConfirm } = pwConfirmState;
+  const { isErr, message } = errMessage;
 
   const navigate = useNavigate();
 
@@ -217,9 +218,9 @@ const SignUp = () => {
           </Button>
         </Div>
         <Div purpose="signup" className="errMessage">
-          {errMessage.isErr && (
+          {isErr && (
             <Span size="medium" bgColor="bright" color="red">
-              {errMessage.message}
+              {message}
             </Span>
           )}
         </Div>
