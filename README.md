@@ -10,6 +10,18 @@
 <br>
 <br>
 
+## 목차
+
+- [개요](#개요)
+- [프로젝트 구조](#프로젝트-구조)
+- [라이브러리](#라이브러리)
+- [프로젝트 실행방법](#프로젝트-실행방법)
+- [데모 이미지 및 배포 (Netlify)](#데모-이미지-및-배포-(Netlify))
+- [회고](#회고)
+
+<br>
+<br>
+
 ## 개요
 
 <br>
@@ -182,9 +194,9 @@ $ npm start
 
 <br>
 
-**1. 프로젝트 구조**
+#### 1. 프로젝트 구조
 
-- Router.js
+- **Router.js**
 
   create react app로 새로운 앱을 만들면 기본값으로 아래와 같이 index.js에서 경로를 관리하게 됩니다.
 
@@ -242,7 +254,7 @@ $ npm start
 
   <br>
 
-- components, pages, styles 폴더
+- **components, pages, styles 폴더**
 
   위에서 보여준 프로젝트 구조를 간략하게 다시 보여드리면
 
@@ -393,9 +405,9 @@ $ npm start
 
 <br>
 
-**2. 인증(Authentication)과 인가(Authorization)**
+#### 2. 인증(Authentication)과 인가(Authorization)
 
-- 유효성 검사
+- **유효성 검사**
 
   로그인과 회원가입 시 input으로 입력되는 값들은 정규표현식을 사용하여 유효성 검사를 했습니다. 이메일은 '@'를 포함한 약간의 추가적인 조건이 있고, 비밀번호는 8자리 이상만 되면 true인 정규표현식을 사용했습니다.
 
@@ -410,13 +422,13 @@ $ npm start
 
   <br>
 
-  ※ 부족한 부분
+  **※ 부족한 부분**
 
   이번 과제에서 사용된 정규표현식은 작성하는 방법을 몰라서 선발 과제 페이지에 나와있는 최소한의 조건에 맞는 정규표현식을 구글링을 통해 가져왔습니다. 따라서 제가 원하는 조건에 맞추기 위해서는 정규표현식에 대한 약간의 공부와 추가적인 구글링을 통해 효율적으로 사용해 보려고 합니다.
 
   <br>
 
-- JWT (JSON Web Token)
+- **JWT (JSON Web Token)**
 
   JWT는 선발 과제 페이지에 안내되어 있는 api를 사용하여 access_token을 응답받아 사용했습니다.
 
@@ -479,9 +491,9 @@ $ npm start
 
 <br>
 
-**3. todo CRUD**
+#### 3. todo CRUD
 
-- Create
+- **Create**
 
   ```javascript
   // src/components/todo/TodoInsert.jsx
@@ -527,7 +539,7 @@ $ npm start
 
   <br>
 
-- Read
+- **Read**
 
   ```javascript
   // src/components/todo/TodoList.jsx
@@ -570,7 +582,7 @@ $ npm start
 
   <br>
 
-- Update, Delete
+- **Update, Delete**
 
   ```javascript
   // src/components/todo/TodoItem.jsx
