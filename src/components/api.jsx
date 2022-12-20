@@ -4,6 +4,7 @@ const BASE_URL = "https://pre-onboarding-selection-task.shop/";
 
 export const postSignUp = async (data) => {
   const { email, password } = data;
+
   return await axios({
     method: "post",
     url: `${BASE_URL}auth/signup`,
