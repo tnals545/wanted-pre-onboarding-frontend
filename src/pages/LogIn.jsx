@@ -125,7 +125,7 @@ const LogIn = () => {
         <Div purpose="login" className="signupSpan">
           <Span>
             아직 계정이 없으신가요?{" "}
-            <Link to="/sign_up">
+            <Link to="/sign-up">
               <Span color="blue" bgColor="bright" bold="thick">
                 회원가입
               </Span>

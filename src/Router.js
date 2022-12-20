@@ -11,7 +11,7 @@ const Router = () => {
       <GlobalStyles />
       <Routes>
         <Route path="/" element={<App />} />
-        <Route path="sign_up" element={<SignUp />} />
+        <Route path="sign-up" element={<SignUp />} />
         <Route path="todo" element={<Todo />} />
       </Routes>
     </BrowserRouter>
