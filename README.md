@@ -648,3 +648,36 @@ $ npm start
   만들어둔 `deleteTodo` api 요청 함수를 import 하여 쓰레기통 아이콘 클릭 시 바로 삭제되도록 구현했습니다.
 
 <br><br>
+
+#### 4. 기타
+
+- **절대경로**
+  이번 과제에서는 프로젝트 구조가 복잡하지 않지만 절대경로를 설정해주는 것이 코드를 좀 더 깔끔하게 만들어준다고 생각합니다.
+  그래서 `src`를 경로 시작의 기본값으로 설정했습니다.
+
+  ```javascript
+  // jsconfig.json
+
+  {
+    "compilerOptions": {
+      "baseUrl": "src"
+    },
+    "include": ["src"]
+  }
+  ```
+
+  <br>
+  절대경로를 설정해주면 예를들어 다음과 같이 코드가 바뀌게 됩니다.
+  ```javascript
+  // before
+  import Title from "../../../../components/Title"
+
+  // after
+  import Title from "src/components/Title"
+
+  ```
+  예를 들어서 설명을 드렸지만 실제로 프로젝트의 구조가 점점 복잡해지고 깊어진다면 충분히 before와 같은 코드가 나타날 수 있습니다.
+  이처럼 before와 after의 차이를 보신다면 제가 절대경로를 설정한 이유를 이해하실 것이라 생각합니다.
+  ```
+
+<br><br>
