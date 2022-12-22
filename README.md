@@ -665,19 +665,19 @@ $ npm start
     "include": ["src"]
   }
   ```
-
-  <br>
+  
   절대경로를 설정해주면 예를들어 다음과 같이 코드가 바뀌게 됩니다.
+  
   ```javascript
   // before
   import Title from "../../../../components/Title"
 
   // after
   import Title from "src/components/Title"
-
   ```
+  
   예를 들어서 설명을 드렸지만 실제로 프로젝트의 구조가 점점 복잡해지고 깊어진다면 충분히 before와 같은 코드가 나타날 수 있습니다.
   이처럼 before와 after의 차이를 보신다면 제가 절대경로를 설정한 이유를 이해하실 것이라 생각합니다.
-  ```
+
 
 <br><br>
