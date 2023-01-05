@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import App from "App";
 import GlobalStyles from "styles/GlobalStyles";
-import SignUp from "pages/SginUp";
+import SignUp from "pages/SignUp";
 import Todo from "pages/Todo";
 
 const Router = () => {

@@ -8,11 +8,15 @@ import { Div } from "styles/Div";
 const TodoList = () => {
   const [todoData, setTodoData] = useState([]);
 
-  useEffect(() => {
-    getTodo()
-      .then((res) => setTodoData(res.data))
+  const getTodoData = async () => {
+    await getTodo()
+      .then((res) => setTodoData([...res.data]))
       .catch((err) => console.error("getTodo:", err));
-  }, [todoData]);
+  };
+
+  useEffect(() => {
+    getTodoData();
+  });
 
   return (
     <Div purpose="todo" className="todoList">

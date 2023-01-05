@@ -49,7 +49,7 @@ const TodoItem = ({ todoObj }) => {
   useEffect(() => {
     if (isEditTodo) {
       setText(todo);
-      textRef.current?.focus();
+      textRef.current.focus();
     }
   }, [isEditTodo, todo]);
 
