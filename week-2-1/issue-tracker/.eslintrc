@@ -15,5 +15,12 @@
     "no-unused-expressions": "off",
     "jsx-a11y/click-events-have-key-events": "off",
     "prettier/prettier": ["error", { "endOfLine": "auto" }]
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": ["src"]
+      }
+    }
   }
 }
